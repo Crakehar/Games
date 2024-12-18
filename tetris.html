@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tetris Game</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f0f0;
+        }
+        canvas {
+            background: #d3d2d2;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="300" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const GRID = 30; // Размер ячейки
+        const COLS = 10; 
+        const ROWS = 20; 
+        const colors = ['cyan', 'blue', 'orange', 'yellow', 'green', 'purple', 'red'];
+
+        let board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+        let currentTetromino;
+        let isGameOver = false;
+        let gameSpeed = 1000; // Начальная скорость (мс)
+        let dropInterval; // Интервал дропов
+
+        // Фигуры Тетриса
+        const tetrominoes = [
+            [[1, 1, 1, 1]], // I
+            [[1, 1, 1], [0, 1, 0]], // T
+            [[1, 1], [1, 1]], // O
+            [[0, 1, 1], [1, 1, 0]], // S
+            [[1, 1, 0], [0, 1, 1]], // Z
+            [[1, 0, 0], [1, 1, 1]], // L
+            [[0, 0, 1], [1, 1, 1]]  // J
+        ];
+
+        function drawBoard() {
+            for (let r = 0; r < ROWS; r++) {
+                for (let c = 0; c < COLS; c++) {
+                    if (board[r][c]) {
+                        ctx.fillStyle = colors[board[r][c] - 1];
+                        ctx.fillRect(c * GRID, r * GRID, GRID, GRID);
+                    }
+                }
+            }
+        }
+
+        function drawTetromino() {
+            currentTetromino.shape.forEach((row, r) => {
+                row.forEach((value, c) => {
+                    if (value) {
+                        ctx.fillStyle = colors[currentTetromino.color];
+                        ctx.fillRect((currentTetromino.x + c) * GRID, (currentTetromino.y + r) * GRID, GRID, GRID);
+                    }
+                });
+            });
+        }
+
+        function collide(offsetX = 0, offsetY = 0) {
+            return currentTetromino.shape.some((row, r) => {
+                return row.some((value, c) => {
+                    if (value) {
+                        const newX = currentTetromino.x + c + offsetX;
+                        const newY = currentTetromino.y + r + offsetY;
+                        return newX < 0 || newX >= COLS || newY >= ROWS || (newY >= 0 && board[newY][newX]);
+                    }
+                    return false;
+                });
+            });
+        }
+
+        function merge() {
+            currentTetromino.shape.forEach((row, r) => {
+                row.forEach((value, c) => {
+                    if (value) {
+                        board[currentTetromino.y + r][currentTetromino.x + c] = currentTetromino.color + 1;
+                    }
+                });
+            });
+        }
+
+        function removeRows() {
+            let rowsToRemove = [];
+            for (let r = 0; r < ROWS; r++) {
+                if (board[r].every(value => value)) {
+                    rowsToRemove.push(r);
+                }
+            }
+
+            rowsToRemove.forEach((r) => {
+                board.splice(r, 1);
+                board.unshift(Array(COLS).fill(0));
+            });
+        }
+
+        function rotate() {
+            const originalShape = currentTetromino.shape;
+            const newShape = originalShape[0].map((_, index) => originalShape.map(row => row[index]).reverse());
+
+            currentTetromino.shape = newShape;
+
+            if (collide()) {
+                currentTetromino.shape = originalShape; // Восстанавливаем оригинальную форму
+            }
+        }
+
+        function spawnTetromino() {
+            const randomIndex = Math.floor(Math.random() * tetrominoes.length);
+            currentTetromino = {
+                shape: tetrominoes[randomIndex],
+                x: Math.floor(COLS / 2) - Math.ceil(tetrominoes[randomIndex][0].length / 2),
+                y: 0,
+                color: randomIndex
+            };
+
+            if (collide()) {
+                isGameOver = true;
+            }
+        }
+
+        function update() {
+            if (isGameOver) return;
+
+            if (!collide(0, 1)) {
+                currentTetromino.y++;
+            } else {
+                merge();
+                removeRows();
+                spawnTetromino();
+            }
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBoard();
+            drawTetromino();
+            update();
+
+            if (!isGameOver) {
+                dropInterval = setTimeout(gameLoop, gameSpeed);
+            } else {
+                ctx.fillStyle = 'red';
+                ctx.font = '40px Arial';
+                ctx.fillText('Game Over', canvas.width / 2 - 100, canvas.height / 2 - 20);
+                ctx.font = '20px Arial';
+                ctx.fillText('Refresh to Restart', canvas.width / 2 - 100, canvas.height / 2 + 20);
+            }
+        }
+
+        function changeSpeed(amount) {
+            gameSpeed = Math.max(100, gameSpeed + amount); // Минимальная скорость 100 мс
+            clearTimeout(dropInterval); // Очищаем предыдущий таймер
+            dropInterval = setTimeout(gameLoop, gameSpeed); // Устанавливаем новый таймер
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (isGameOver) return;
+
+            if (e.key === 'ArrowLeft' && !collide(-1, 0)) {
+                currentTetromino.x--;
+            } else if (e.key === 'ArrowRight' && !collide(1, 0)) {
+                currentTetromino.x++;
+            } else if (e.key === 'ArrowDown') {
+                update(); // Ускоряем вниз
+            } else if (e.key === 'ArrowUp') {
+                rotate(); // Вращаем
+            } else if (e.key === 's') { // Увеличиваем скорость
+                changeSpeed(-100);
+            } else if (e.key === 'a') { // Уменьшаем скорость
+                changeSpeed(100);
+            }
+        });
+
+        spawnTetromino();
+        gameLoop();
+    </script>
+</body>
+</html>
