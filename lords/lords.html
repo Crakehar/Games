@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Зима близко! 👑 Время для переговоров</title>
+    <link href="https://fonts.googleapis.com/css2?family=Old+English+Text&family=Almendra&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> <!-- Подключаем CSS файл -->
+      </style>
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="path/spirit.mp3" type="audio/mpeg">
+    </audio>
+
+    <h1 class="header">
+        <div class="background-image"></div>
+       <!-- <img src="path/image.jpg" alt="Описание изображения" class="header-image"> -->
+    </h1>
+    
+    <div class="housesContainer"> <!-- меню домов -->
+        <div class="house" oncontextmenu="showMenu(event, 'menu1'); return false;">
+            <img src="path/Пегаса.webp" alt="Дом Пегаса" class="house-icon" width="300" height="300"> 
+            <div class="house-name">Дом Пегаса</div>
+        </div>
+        <div class="house" oncontextmenu="showMenu(event, 'menu2'); return false;">
+            <img src="path/Единорога.webp" alt="Дом Единорога" class="house-icon"> 
+            <div class="house-name">Дом Единорога</div>
+        </div>
+        <div class="house" oncontextmenu="showMenu(event, 'menu3'); return false;">
+            <img src="path/Минотавра.webp" alt="Дом Минотавра" class="house-icon"> 
+            <div class="house-name">Дом Минотавра</div>
+        </div>
+        <div class="house" oncontextmenu="showMenu(event, 'menu4'); return false;">
+            <img src="path/Мантикора.webp" alt="Дом Мантикора" class="house-icon"> 
+            <div class="house-name">Дом Мантикора</div>
+        </div>
+        <div class="house" oncontextmenu="showMenu(event, 'menu5'); return false;">
+            <img src="path/Гидра.webp" alt="Дом Гидра" class="house-icon"> 
+            <div class="house-name">Дом Гидра</div>
+        </div>
+    
+        <div id="menu1" class="popup-menu">
+            <ul>
+                <li onclick="performAction('maxTax')"><img src="path/Максимальный Налог.webp" alt="Максимальный Налог"> Максимальный Налог</li>
+                <li onclick="performAction('defense')"><img src="path/Оборона.webp" alt="Оборона"> Оборона</li>
+                <li onclick="performAction('development')"><img src="path/Развитие.webp" alt="Развитие"> Развитие</li>
+                <li onclick="performAction('attack')"><img src="path/Атака.webp" alt="Атака"> Атака</li>
+                <li onclick="closeMenu('menu1')"><img src="path/Закрыть.png" alt="Закрыть"> Закрыть</li>
+            </ul>
+        </div>
+    
+        <div id="menu2" class="popup-menu">
+            <ul>
+                <li onclick="performAction('maxTax')"><img src="path/Максимальный Налог.webp" alt="Максимальный Налог"> Максимальный Налог</li>
+                <li onclick="performAction('defense')"><img src="path/Оборона.webp" alt="Оборона"> Оборона</li>
+                <li onclick="performAction('development')"><img src="path/Развитие.webp" alt="Развитие"> Развитие</li>
+                <li onclick="performAction('attack')"><img src="path/Атака.webp" alt="Атака"> Атака</li>
+                <li onclick="closeMenu('menu2')"><img src="path/Закрыть.png" alt="Закрыть"> Закрыть</li>
+            </ul>
+        </div>
+    
+        <div id="menu3" class="popup-menu">
+            <ul>
+                <li onclick="performAction('maxTax')"><img src="path/Максимальный Налог.webp" alt="Максимальный Налог"> Максимальный Налог</li>
+                <li onclick="performAction('defense')"><img src="path/Оборона.webp" alt="Оборона"> Оборона</li>
+                <li onclick="performAction('development')"><img src="path/Развитие.webp" alt="Развитие"> Развитие</li>
+                <li onclick="performAction('attack')"><img src="path/Атака.webp" alt="Атака"> Атака</li>
+                <li onclick="closeMenu('menu3')"><img src="path/Закрыть.png" alt="Закрыть"> Закрыть</li>
+            </ul>
+        </div>
+        <div id="menu4" class="popup-menu">
+            <ul>
+                <li onclick="performAction('maxTax')"><img src="path/Максимальный Налог.webp" alt="Максимальный Налог"> Максимальный Налог</li>
+                <li onclick="performAction('defense')"><img src="path/Оборона.webp" alt="Оборона"> Оборона</li>
+                <li onclick="performAction('development')"><img src="path/Развитие.webp" alt="Развитие"> Развитие</li>
+                <li onclick="performAction('attack')"><img src="path/Атака.webp" alt="Атака"> Атака</li>
+                <li onclick="closeMenu('menu4')"><img src="path/Закрыть.png" alt="Закрыть"> Закрыть</li>
+            </ul>
+        </div>
+        <div id="menu5" class="popup-menu">
+            <ul>
+                <li onclick="performAction('maxTax')"><img src="path/Максимальный Налог.webp" alt="Максимальный Налог"> Максимальный Налог</li>
+                <li onclick="performAction('defense')"><img src="path/Оборона.webp" alt="Оборона"> Оборона</li>
+                <li onclick="performAction('development')"><img src="path/Развитие.webp" alt="Развитие"> Развитие</li>
+                <li onclick="performAction('attack')"><img src="path/Атака.webp" alt="Атака"> Атака</li>
+                <li onclick="closeMenu('menu5')"><img src="path/Закрыть.png" alt="Закрыть"> Закрыть</li>
+            </ul>
+        </div>
+    </div> <!-- конец меню -->
+    <button onclick="startGame()" class="cursive">Play game</button>
+    <button onclick="toggleMusic()" class="cursive">Play/Stop sound</button>
+    <div id="attackInfo" style="position: absolute; top: 10px; left: 10px; font-size: 20px;"></div>
+<div id="defenseInfo" style="position: absolute; top: 40px; left: 10px; font-size: 20px;"></div>
+<div id="dice" style="display: none;"></div>
+    <div id="gameBoard"></div>
+    <div id="menu"></div>
+    <div class="menu-container">
+        <img src="path/menu.webp" alt="Menu" class="menu-icon" id="menuToggle"> <!-- Здесь может быть ваш значок --></div>
+        <div class="sidebar" id="sidebar">
+            <ul>
+                <li><a href="#">Правила</a></li>
+                <li><a href="#">Форум</a></li>
+                <li><a href="#">Сайт</a></li>
+                <li><a href="#">Создатели</a></li>
+            </ul>
+        </div>
+    </div>
+    <script src="script.js"></script> <!-- Подключаем внешний JS файл -->
+</body>
+</html>

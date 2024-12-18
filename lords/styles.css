@@ -1,0 +1,402 @@
+body {
+    text-align: center; /* Центрирует текст на странице */
+    background-color: #f0f8ff;
+    color: #333;
+    font-family: 'Almendra', serif; /* Основной шрифт */
+    height: 100%; /* Занимает всю высоту окна */
+    margin: 0; /* Убираем отступы по умолчанию */
+   
+}
+.menu-container {
+position: relative;
+padding: 10px; /* Внутренние отступы */
+ } 
+
+.header {
+position: relative; /* Установите относительное позиционирование */
+text-align: center; /* Центрирование текста и содержимого */
+padding: 20px; /* Отступы вокруг содержимого */
+}
+.background-image {
+position: fixed; /* Абсолютное позиционирование для фона */
+top: 10;
+left: 0;
+right: 0;
+bottom: 0;
+width: 100%; /* Занимает всю ширину */
+height: 100%; /* Занимает всю высоту */
+background-image: url('path/Fonnn.jpg'); /* Путь к фоновому изображению */
+background-size: cover; /* Заполнение области фоном */
+background-position: center; /* Центрирование фонового изображения */
+z-index: -1; /* Поместите фоновое изображение ниже других элементов */
+}
+
+.header-image {
+max-width: 100%; /* Адаптивное изображение */
+height: auto; /* Сохранение пропорций */
+}
+/* боковое меню */
+.menu-icon {
+    cursor: url('path/Cursor.cur'), auto;
+    position: fixed; /* Фиксированное положение */
+    bottom: 20px; /* Отступ от нижнего края экрана */
+    left: 50%; /* Центрирование по горизонтали */
+    transform: translateX(-50%); /* Корректировка для центрирования */
+    max-width: 250px; /* Максимальная ширина */
+    max-height: 100px; /* Максимальная высота */
+    width: auto; /* Автоширина для сохранения пропорций */
+    height: auto; /* Автовысота для сохранения пропорций */
+    z-index: 5; /* Порядок отображения */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавный переход */
+}
+
+.sidebar {
+width: 150px; /* Ширина меню */
+background-color: #333; /* Цвет фона меню */
+position: fixed; /* Фиксированное положение */
+top: 0; /* Вертикальное расположение */
+left: -150px; /* Начальное положение (скрыто) */
+height: 100%; /* Высота меню */
+transition: left 0.3s ease; /* Анимация появления */
+z-index: 5; /* Положение по слою */
+}
+
+.sidebar ul {
+list-style-type: none; /* Убираем маркеры списка */
+padding: 0; /* Убираем отступы */
+margin: 0; /* Убираем поля */
+}
+
+.sidebar li a {
+display: block; /* Делаем элементы ссылки блочными */
+padding: 15px; /* Отступы внутри ссылок */
+color: white; /* Цвет текста */
+text-decoration: none; /* Убираем подчеркивание */
+}
+
+.sidebar li a:hover {
+background-color: #575757; /* Цвет при наведении */  /*всплывающее меню*/
+}
+.old-english {
+    font-family: 'Old English Text', cursive; /* Для Old English Text */
+}
+
+.cursive {
+    font-family: 'Uncial Antiqua', cursive; /* Курсивный стиль  */
+    font-size: 24px; /* Увеличиваем размер шрифта */ 
+    
+}
+
+#gameBoard {
+width: 80%; /* Теперь 80% от родителя */
+height: auto; /* Высота автоматически подстраивается */
+max-width: 500px; /* Максимальная ширина 300 пикселей */
+background: linear-gradient(to right, #52beda, #d12b2b);
+}
+
+p {
+    font-size: 40px; /* Увеличиваем размер шрифта для абзацев */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    margin: 5px 0; /* Устанавливаем верхний и нижний отступ в 5 пикселей */
+}
+
+.housesContainer {  /* меню домов */
+    display: flex; /* Выравнивание всех домов в ряд */  
+    padding: 20px;
+    cursor: url('path/Cursor.cur'), auto; /* Указатель курсора при наведении */
+
+}
+.house {
+    font-size: 30px; /* размер шрифта */
+    padding: 20px; /* Увеличенные отступы */
+    color: #333; /* Цвет текста */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Плавные переходы при наведении */
+    position: relative; /* Для использования псевдо-элементов */
+    border-radius: 12px; /* Закругление углов (при необходимости) */
+    overflow: visible; /* Позволяет тексту выходить за пределы */
+    background-color: transparent; /* Прозрачный фон по умолчанию */
+}
+
+.house:hover { /* Подсветка */
+    transform: scale(1.05) rotate(0deg); /* Увеличение и легкий поворот для динамики */
+    background: linear-gradient(to top left, rgba(255, 255, 255, 0.205), rgba(248, 248, 245, 0.315)); /* Градиентный фон при наведении */
+    box-shadow: 0 0 5px rgba(248, 247, 247, 0.151), 0 0 10px rgba(241, 241, 240, 0.103); /* Более мягкие тени для глубины */
+    border: none; /* Удаление возможных рамок или контуров */
+    outline: none; /* Убедиться, что не остается контура */
+}
+
+.house-icon {
+    width: 100%; /* Ширина значка */
+    height: auto; /* Сохраним пропорции */
+    image-rendering: crisp-edges; 
+    
+}
+/* Псевдо-элемент для свечения */
+.house::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit; /* Задает такие же закругленные углы как у основного элемента */
+    box-shadow: 0 0 5px rgba(248, 247, 247, 0.6); /* Задание светлой тени */
+    opacity: 0; /* Изначально невидимо */
+    transition: opacity 0.3s ease; /* Плавное появление */
+}
+.house-name {
+    color: #0c070fa1; /* Цвет текста */
+    margin-left: 10px; /* Отступ между значком и текстом */
+    opacity: 0; /* Скрываем текст по умолчанию */
+    transform: scale(0.8) translateY(10px); /* Начальный масштаб и смещение по оси Y */
+    text-shadow: 0 0 5px rgb(0, 0, 0); /* Добавляем тень к тексту для эффекта глубины */
+    transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease; /* Плавный переход */
+}
+  /* Активируем анимацию при наведении */
+  .house:hover .house-name,
+  .house:focus .house-name { 
+      opacity: 1; /* Показываем текст */
+      transform: scale(1) translateY(0); /* Нормальный размер и убираем смещение */
+      color: #000000; /* Меняем цвет текста при наведении */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8), 
+                 2px 3px 5px rgba(255, 193, 7, 0.5); /* Красивый эффект тени */
+  }
+
+.crown {
+    display: inline-block;
+    font-size: 2em;
+    margin: 10px 0;
+}
+button { /* кнопки */
+    position: relative; /* Или absolute, если необходимо */
+    top: -20px; /* Поднимаем кнопку на 20 пикселей относительно ее нормального положения */
+    background-image: url('path/fon.jpg');
+    color: white; /* Белый текст */
+    padding: 15px 32px; /* Увеличенные отступы */
+    font-size: 18px; /* Увеличиваем размер шрифта */
+    margin: 20px auto; /* Отступ сверху и снизу, центрирование */
+    cursor: url('path/Cursor.cur'), auto; /* Указатель курсора при наведении */
+    border-radius: 10px; /* Скругленные углы */
+    transition: background-color 0.3s, transform 0.3s; /* Плавный переход цвета и трансформации */
+}
+
+/* Эффект наведения */
+button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый цвет при наведении */
+    transform: scale(1.05); /* Увеличение размера кнопки при наведении */
+}
+
+/* Эффект нажатия */
+button:active {
+    transform: scale(0.95); /* Уменьшение размера кнопки при нажатии */
+    background-color: rgba(255, 255, 255, 0.3); /* Изменение цвета фона при нажатии */
+} /*кнопки */
+#dice {
+    display: none;
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 72px;
+    line-height: 200px;
+    border-radius: 10px;
+    background-image: url('path/Div.gif');
+    background-size: cover; /* Изображение занимает весь элемент */
+    background-position: center; /* Центрировать изображение */
+    animation: roll 0.5s forwards;
+    position: absolute; /* Абсолютное позиционирование */
+    top: 50%; /* Сдвиг вниз на 50% высоты родителя */
+    left: 33.3%; /* Сдвиг вправо на 50% ширины родителя */
+    transform: translate(-50%, -50%); /* Сдвигаем назад на половину размера элемента */
+    animation: roll 0.5s forwards; /* Анимация (если требуется) */
+    
+
+    
+
+}
+@keyframes roll {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor:  url('path/Cursor.cur'), auto;
+}
+/* Стили для изображения */
+.header-image {
+display: block;
+width: 100%;
+height: auto;
+margin: 0;
+transform: translateY(-20px); /* Поднимаем изображение вверх */
+border: 2px solid rgb(7, 1, 1); /* Тестовая рамка, чтобы видеть пределы изображения */
+}
+   /* Стили для пламени */
+   .flame {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: url('path/flame.gif') no-repeat center center;
+    background-size: cover;
+    display: none; /* Изначально скрыто */
+    animation: flame-animation 1s forwards;
+}
+@keyframes flame-animation {
+    0% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0.8; transform: translateY(-10px); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}     
+
+
+
+#sidebar {
+    width: 100%; /* Ширина на весь экран */
+    height: 60px; /* Фиксированная высота меню (можно поменять) */
+    font-size: 18px; 
+    display: none; /* Скрыто по умолчанию */
+    text-align: center; /* Центрируем текст */
+    background: rgba(217, 221, 224, 0.11); /* Полупрозрачный цвет фона */
+    border-top-left-radius: 10px; /* Скругляем верхние углы */
+    border-top-right-radius: 10px; /* Скругляем верхние углы */
+    box-shadow: 0 -4px 40px rgba(0, 0, 0, 0.5); /* Тень сверху */
+    overflow: hidden; /* Прячем содержимое, выходящее за пределы */
+    backdrop-filter: blur(10px); /* Размытие заднего фона */
+    opacity: 1; 
+    transition: all 0.3s ease; 
+    position: fixed; /* Позиционирование относительно окна */
+    bottom: -60; /* Прикреплено к нижней части экрана */
+    left: 0; /* Прикреплено к левому краю экрана */
+}
+
+#sidebar.show {
+    display: block; /* Показать меню */
+    animation: slideIn 0.5s forwards; /* Анимация появления */
+    bottom: 0; /* Позиция на экране */
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px); /* Начальная позиция немного выше */
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#sidebar ul {
+    list-style-type: none; 
+    padding: 0; 
+    margin: 0; 
+    height: 100%; /* Высота списка равна высоте меню */
+    display: flex; /* Используем flexbox для размещения элементов в один ряд */
+    align-items: center; /* Центруем элементы по вертикали */
+    justify-content: center; /* Центруем элементы по горизонтали */
+}
+
+#sidebar li {
+    padding: 0 15px; /* Горизонтальные отступы для элементов */
+    white-space: nowrap; /* Не переносим текст */
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    color: #fff; 
+    transition: background-color 0.3s, transform 0.2s; 
+}
+
+#sidebar li:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+    transform: scale(1.05); 
+}
+
+.popup-menu {
+    width: 200px; /* Увеличенная ширина меню */
+    height: auto;
+    background: linear-gradient(135deg, rgba(247, 246, 246, 0.089), rgba(223, 137, 52, 0.274)); /* Яркий градиент фона */
+    position: absolute;
+    top: 0;
+    left: -250px; /* Начальное положение (скрыто) */
+    transition: left 0.4s ease, transform 0.2s ease;
+    z-index: 5;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5); /* Более выраженная тень */
+    overflow: hidden;
+    padding: 15px;
+    backdrop-filter: blur(15px); /* Увеличенное размытие заднего фона */
+}
+
+/* Стиль списка */
+.popup-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Элементы списка */
+.popup-menu li {
+    padding: 12px 20px; /* Увеличенные отступы */
+    cursor: url('path/Cursor.cur'), pointer;
+    display: flex;
+    align-items: center;
+    position: relative; /* Для эффекта псевдоэлементов */
+    overflow: hidden; /* Скрыть переведённый текст в пределах элементов */
+    transition: all 0.3s ease; 
+    color: #ffffff; /* Цвет текста по умолчанию */
+    font-size: 16px; /* Увеличенный размер шрифта */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Тень текста */
+}
+
+/* Графический элемент на фоне элемента меню для эффекта при наведении */
+.popup-menu li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.2); /* Полупрозрачный фон */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.popup-menu li:hover::before {
+    opacity: 1; /* Появление полупрозрачного фона */
+}
+
+/* Элемент изображения */
+.popup-menu li img {
+    width: 24px; /* Больше значков */
+    height: 24px;
+    margin-right: 10px;
+    transition: transform 0.3s; 
+}
+
+/* Подсветка и эффекты при наведении */
+.popup-menu li:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Подсветка с прозрачностью */
+    transform: translateY(-2px); /* Лёгкое "подпрыгивание" */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); /* Тень при наведении */
+    color: #1b1709; /* Цвет текста при наведении */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Увеличенная тень текста при наведении */
+}
+
+.popup-menu li:hover img {
+    transform: scale(1.2); /* Увеличиваем значок значительно при наведении */
+}
+
+/* Анимация входа для меню */
+.popup-menu.show {
+    left: 0; /* Позиция при показе */
+    transform: scale(1); /* Масштабируем до нормального размера */
+}
+#menu {
+    position: absolute;
+    display: none; /* Скрыто по умолчанию */
+    border: 1px solid black;
+    background-color: white;
+    z-index: 1000; /* Чтобы меню было на переднем плане */
+}
