@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цветовая Память</title>
+    <style>
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f0f0; }
+        #game { display: grid; grid-template-columns: repeat(3, 100px); grid-gap: 10px; }
+        .button { width: 100px; height: 100px; border: none; border-radius: 10px; cursor: pointer; position: relative; }
+        .red { background-color: red; }
+        .green { background-color: green; }
+        .blue { background-color: blue; }
+        .yellow { background-color: yellow; }
+        .orange { background-color: orange; }
+        .purple { background-color: purple; }
+        .active { opacity: 0.5; }
+    </style>
+</head>
+<body>
+    <div id="game">
+        <button class="button red"></button>
+        <button class="button green"></button>
+        <button class="button blue"></button>
+        <button class="button yellow"></button>
+        <button class="button orange"></button>
+        <button class="button purple"></button>
+    </div>
+
+    <script>
+        const colors = ['red', 'green', 'blue', 'yellow', 'orange', 'purple'];
+        let sequence = [];
+        let userInput = [];
+        let level = 0;
+
+        const buttons = document.querySelectorAll('.button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const color = button.classList[1];
+                userInput.push(color);
+                highlightButton(color);
+                checkInput();
+            });
+        });
+
+        function nextLevel() {
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            sequence.push(randomColor);
+            userInput = [];
+            level++;
+            playSequence();
+        }
+
+        function playSequence() {
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i >= sequence.length) {
+                    clearInterval(interval);
+                    return;
+                }
+                highlightButton(sequence[i]);
+                i++;
+            }, 1000);
+        }
+
+        function highlightButton(color) {
+            const button = document.querySelector(`.${color}`);
+            button.classList.add('active');
+            setTimeout(() => {
+                button.classList.remove('active');
+            }, 500);
+        }
+
+        function checkInput() {
+            const lastInput = userInput.length - 1;
+            if (userInput[lastInput] !== sequence[lastInput]) {
+                alert('Неправильно! Начинаем заново!');
+                resetGame();
+            } else if (userInput.length === sequence.length) {
+                setTimeout(nextLevel, 1000);
+            }
+        }
+
+        function resetGame() {
+            sequence = [];
+            level = 0;
+            nextLevel();
+        }
+
+        nextLevel();
+    </script>
+</body>
+</html>
