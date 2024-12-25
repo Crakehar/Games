@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фрактал Мандельброта</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #000;
+        }
+        canvas {
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Устанавливаем размеры канваса
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Функция для показа цвета в зависимости от количества итераций
+        function getColor(iteration) {
+            const color = 255 - Math.floor(iteration * 255 / 100); // Простой переход цвета
+            return `rgb(${color}, ${color}, ${color})`;
+        }
+
+        function mandelbrot(cx, cy, maxIter) {
+            let x = 0;
+            let y = 0;
+            let iteration = 0;
+
+            while (iteration < maxIter && (x * x + y * y <= 4)) {
+                const xTemp = x * x - y * y + cx;
+                y = 2 * x * y + cy;
+                x = xTemp;
+                iteration++;
+            }
+            return iteration;
+        }
+
+        function drawMandelbrot() {
+            const maxIter = 100;
+
+            for (let x = 0; x < canvas.width; x++) {
+                for (let y = 0; y < canvas.height; y++) {
+                    const cx = (x / canvas.width) * 3.5 - 2.5; // Устанавливаем диапазон по оси X
+                    const cy = (y / canvas.height) * 2 - 1; // Устанавливаем диапазон по оси Y
+
+                    const iteration = mandelbrot(cx, cy, maxIter);
+                    ctx.fillStyle = getColor(iteration);
+                    ctx.fillRect(x, y, 1, 1);
+                }
+            }
+        }
+
+        drawMandelbrot();
+    </script>
+</body>
+</html>
