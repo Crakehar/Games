@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Fall of Shadows</title>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    </head>
+    <body>
+      <h1 class="header">
+            <div class="background-image"></div>
+        </h1>
+        <div class="lord-houses"></div> 
+         <button class="start-game" style="display: none;">Start Game</button>
+         <div class="houses"></div>   
+         <div class="house-selection"></div> 
+        <div class="action-screen" style="display: none;">
+            <div class="actions"></div>
+           <div class="complex"></div>
+            <div class="timer">Осталось времени: <span class="time-left"></span> сек</div>
+            <div class="container"></div>    
+        </div>
+        <div class="complex-display"style="display: none;">
+            <div class="expected-income"></div>
+        </div>
+            <div class="chat" style="display:none;">
+                <div class="chat-tabs">
+                    <button class="chat-button" data-chat-type="trading">Торговый чат</button>
+                    <button class="chat-button" data-chat-type="internal">Внутренний чат</button>
+                    <button class="chat-button" data-chat-type="general">Общий чат</button>
+                </div>
+            <div class="chat-log"></div>
+            <input type="text" class="chat-message" placeholder="Введите сообщение...">
+            <button class="send-chat">Отправить</button>
+            <select class="message-receiver">       
+                <option value="">Выберите дом для личного сообщения</option>
+            </select>
+        </div>
+        </div>
+        <div class="inventory">
+            <div class="coinsDisplay"></div>
+            <div class="resourceDisplay"></div>
+        </div>
+        <div class="trade-menu" style="display: none;">
+             <h2 class="trader">Trader</h2>
+             <div class="tradeactions"></div>
+             <div class="trade-images"></div>
+         <button class="buy1">Purchase</button>
+           <button class="sell"  data-resource="Дерево">
+            <img src="images/Wood.webp" alt="Дерево">
+        </button>
+           <button class="sell"  data-resource="Камень">
+           <img src="images/Stone.webp" alt="Камень">
+        </button>
+           <button class="sell"  data-resource="Ткань">
+           <img src="images/Fabric.webp" alt="Ткань">
+        </button>
+           <button class="sell"  data-resource="Краска">
+           <img src="images/Paint.webp" alt="Краска">
+        </button>
+           <button class="sell"  data-resource="Еда">
+           <img src="images/Food.webp" alt="Еда">
+        </button>
+            <button class="close-trade-menu">Закрыть</button>
+        </div>
+       <div class="market"></div>
+        <div class="announcement-board" style="display: none;">
+            <h2 class="Board">Trading board</h2>
+            <div class="announcements"></div>
+            <button class="close-announcement-board">Закрыть</button>
+    </div>
+    <script src="script.js"></script>
+    
+</body>
+</html>
