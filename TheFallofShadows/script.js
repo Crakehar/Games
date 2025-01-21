@@ -26,7 +26,7 @@ class Game {
         this.selectedHouse = null;
         this.resourcesAdded = false;
         this.announcementBoard = document.querySelector('.announcement-board');
-        this.backgroundMusic = new Audio('sound/Spirit.mp3');
+        this.backgroundMusic = new Audio('sound/spirit.mp3');
         this.buttonSound = new Audio('sound/button-click.mp3');
         this.choiceSound = new Audio('sound/choice.mp3');
         this.init();
